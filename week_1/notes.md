@@ -1,6 +1,6 @@
 # Week 1: Includes Issues faced and Resolutions
 
-My [Data Engineering Zoomcamp Github](https://github.com/blessedmadukoma/DE-Zoomcamp)
+[My Data Engineering Zoomcamp Github](https://github.com/blessedmadukoma/DE-Zoomcamp)
 
 <u>Introduction:</u>
 Week 1 introduces the course, installations, setup and prerequisites needed. The Introduction into the concept of Data Engineering, tools to be used in the Zoomcamp such as Prefect, Airflow, Python, GCP, Terraform, Apache Spark and Docker are shown. 
