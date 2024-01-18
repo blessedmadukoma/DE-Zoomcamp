@@ -39,15 +39,15 @@ Containers offer the capability to run Database Management Systems like MySQL or
     ```
     docker run -it \    
       -e POSTGRES_USER="root" \
-      -e POSTGRES_PASSWORD="root" \       
-      -e POSTGRES_DB="ny_taxi_data_eng" \       
+      -e POSTGRES_PASSWORD="root" \      
+      -e POSTGRES_DB="ny_taxi_data_eng" \      
       -v $(pwd)/ny_taxi_postgres_data:/var/lib/postgresql/data \    
       -p 5432:5432 \   
       --name DE_zoomcamp \
       postgres:14-alpine
     ```
       
-    The above command runs a Postgres container named DE_zoomcamp with a db name of ny_taxi_data_eng, a persistent volume linking the created folder/directory “ny_taxi_postgres_data” to the container storage. 
+    The above command runs a Postgres container named DE_zoomcamp with a db name of ny_taxi_data_eng, a persistent volume linking the created folder/directory “ny_taxi_postgres_data” to the container storage.
   
   - Install pgcli using pip: `pip install pgcli` 
   - Connect to the database using pgcli by running: `pgcli -h localhost -p 5432 -u root -d ny_taxi_data_eng`
@@ -63,14 +63,14 @@ After installing pgcli using both pip and brew, I encountered this error.
 ￼
 ![PGCLI resolved](/images/03_pgcli_2.png "PGCLI resolved")
 
-**Note:** Jupiter Notebook is used but I opted for VSCode because of my familiarity with the awesome tool. 
+**Note:** Jupiter Notebook is used but I opted for VSCode because of my familiarity with the awesome tool.
 
 Connecting to my database to check the total records, I have the complete data:
 
 ![data](/images/04_db_connection.png "data")
 ￼
 
-### 3. Connecting PG admin to Postgres: 
+### 3. Connecting PG admin to Postgres:
   <br/>
   To use the web GUI tool PGAdmin in docker, do the following:
   1. Run the image using the command:
@@ -81,7 +81,7 @@ Connecting to my database to check the total records, I have the complete data:
   -e PGADMIN_DEFAULT_PASSWORD=“yourPassword” \
   -p 9090:80 \
   --name my_pgadmin4 \
-  dpage/pgadmin4  
+  dpage/pgadmin4
   ```
   
   This will automatically pull the image if you do not have it on your local machine.
