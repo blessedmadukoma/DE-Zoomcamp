@@ -19,8 +19,8 @@ def load_from_google_cloud_storage(*args, **kwargs):
     config_path = path.join(get_repo_path(), 'io_config.yaml')
     config_profile = 'default'
 
-    bucket_name = 'your_bucket_name'
-    object_key = 'your_object_key'
+    bucket_name = 'mage-de-zoomcamp'
+    object_key = 'nyc_taxi_data.parquet'
 
     return GoogleCloudStorage.with_config(ConfigFileLoader(config_path, config_profile)).load(
         bucket_name,

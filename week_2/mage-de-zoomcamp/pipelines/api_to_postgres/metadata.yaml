@@ -10,12 +10,12 @@ blocks:
   language: python
   name: load_api_data
   retry_config: null
-  status: failed
+  status: executed
   timeout: null
   type: data_loader
   upstream_blocks: []
   uuid: load_api_data
-- all_upstream_blocks_executed: false
+- all_upstream_blocks_executed: true
   color: null
   configuration: {}
   downstream_blocks:
@@ -33,7 +33,7 @@ blocks:
   upstream_blocks:
   - load_api_data
   uuid: transform_taxi_data
-- all_upstream_blocks_executed: false
+- all_upstream_blocks_executed: true
   color: null
   configuration: {}
   downstream_blocks: []
@@ -43,13 +43,13 @@ blocks:
   language: python
   name: taxi_to_gcs_parquet
   retry_config: null
-  status: failed
+  status: executed
   timeout: null
   type: data_exporter
   upstream_blocks:
   - transform_taxi_data
   uuid: taxi_to_gcs_parquet
-- all_upstream_blocks_executed: false
+- all_upstream_blocks_executed: true
   color: null
   configuration: {}
   downstream_blocks: []
@@ -86,7 +86,7 @@ settings:
 spark_config: {}
 tags: []
 type: python
-updated_at: '2024-02-07 16:04:06'
+updated_at: '2024-02-07 16:35:59'
 uuid: api_to_postgres
 variables_dir: /home/src/mage_data/mage-de-zoomcamp
 widgets: []
