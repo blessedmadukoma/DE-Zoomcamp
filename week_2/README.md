@@ -29,7 +29,7 @@ Navigate to the repo:
 cd week2
 ```
 
-Rename `dev.env` to simply `.env`— this will _ensure_ the file is not committed to Git by accident, since it _will_ contain credentials in the future.
+Rename `.env.example` to simply `.env`— this will _ensure_ the file is not committed to Git by accident, since it _will_ contain credentials in the future.
 
 Now, let's build the container
 
