@@ -9,7 +9,7 @@ services:
       context: .
       dockerfile: Dockerfile
     environment:
-      USER_CODE_PATH: /home/src/${PROJECT_NAME}
+      USER_CODE_PATH: /Users/blessedmadukoma/Desktop/Code/learn/data-engineering/zoomcamp2022/week_2/homework/${PROJECT_NAME}
       POSTGRES_DBNAME: ${POSTGRES_DBNAME}
       POSTGRES_SCHEMA: ${POSTGRES_SCHEMA}
       POSTGRES_USER: ${POSTGRES_USER}
@@ -17,9 +17,9 @@ services:
       POSTGRES_HOST: ${POSTGRES_HOST}
       POSTGRES_PORT: ${POSTGRES_PORT}
     ports:
-      - 6790:6789
+      - 6789:6789
     volumes:
-      - /Users/blessedmadukoma/Desktop/Code/learn/data-engineering/zoomcamp2022/week_2:/home/src/homework:/home/src/
+      - /Users/blessedmadukoma/Desktop/Code/learn/data-engineering/zoomcamp2022/week_2/homework:/home/src/
       - ~/Documents/secrets/personal-gcp.json:/Users/blessedmadukoma/Desktop/Code/learn/data-engineering/zoomcamp2022/week_1/terraform_gcp/terraform/de-zoomcamp-410913-ff0c577f1526.json
     restart: on-failure:5
   postgres:
