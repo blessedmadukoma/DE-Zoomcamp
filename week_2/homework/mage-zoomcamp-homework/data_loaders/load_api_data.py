@@ -17,8 +17,6 @@ def load_data(*args, **kwargs):
 
     file_names = ["green_tripdata_2020-10.csv.gz", "green_tripdata_2020-11.csv.gz", "green_tripdata_2020-12.csv.gz"]
      
-    # parse_dates = ["lpep_pickup_datetime"]
-
     # Load data for the final quarter of 2020
     dfs = []
     for file_name in file_names:
@@ -48,13 +46,3 @@ def load_data(*args, **kwargs):
         df = pd.read_csv(full_url, parse_dates=parse_dates, dtype=taxi_datatypes)
         dfs.append(df)
     return pd.concat(dfs)
-
-# @test
-# def test_output(output, *args) -> None:
-#     """
-#     Template code for testing the output of the block.
-#     """
-#     # assert output is not None, 'The output is undefined'
-#     assert output["vendor_id"] is not None, 'The output is undefined'
-#     assert output['passenger_count'] > 0, 'Passenger count is not greater than 0'
-#     assert output["trip_distance"] > 0, 'Trip distance is not greater than 0'
