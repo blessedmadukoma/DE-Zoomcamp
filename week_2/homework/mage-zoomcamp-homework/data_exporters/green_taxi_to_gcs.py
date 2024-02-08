@@ -1,0 +1,39 @@
+from mage_ai.settings.repo import get_repo_path
+from mage_ai.io.config import ConfigFileLoader
+from mage_ai.io.google_cloud_storage import GoogleCloudStorage
+from pandas import DataFrame
+from os import path
+
+import pyarrow as pa
+import pyarrow.parquet as pq
+import os
+
+if 'data_exporter' not in globals():
+    from mage_ai.data_preparation.decorators import data_exporter
+
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/home/src/de-zoomcamp-410913-95515fddfe60.json"
+bucket_name = "mage-de-zoomcamp-homework-week2"
+project_id = "de-zoomcamp-410913"
+
+table_name = "green_taxi_data_homework"
+
+root_path = f'{bucket_name}/{table_name}'
+
+@data_exporter
+def export_data_to_google_cloud_storage(data, *args, **kwargs):
+    # partitioning based on date
+    data['lpep_pickup_date'] = data['lpep_pickup_datetime'].dt.date
+    
+    # defining a pyarrow table and reading the dataframe into the pyarrow table
+    table = pa.Table.from_pandas(data)
+
+    # defining the Google cloud storage file system
+    gcs = pa.fs.GcsFileSystem()
+
+    # writing to the parquet dataset
+    pq.write_to_dataset(
+        table,
+        root_path=root_path,
+        partition_cols=['lpep_pickup_date'],
+        filesystem=gcs
+    )
