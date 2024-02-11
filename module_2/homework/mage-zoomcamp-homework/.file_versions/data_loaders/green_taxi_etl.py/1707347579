@@ -1,0 +1,67 @@
+from mage_ai.settings.repo import get_repo_path
+from mage_ai.io.config import ConfigFileLoader
+from mage_ai.io.postgres import Postgres
+from os import path
+if 'data_loader' not in globals():
+    from mage_ai.data_preparation.decorators import data_loader
+if 'test' not in globals():
+    from mage_ai.data_preparation.decorators import test
+
+
+@data_loader
+def load_data(*args, **kwargs):
+
+    base_url = "https://github.com/DataTalksClub/nyc-tlc-data/releases/download/green/"
+
+    file_names = ["green_tripdata_2020-10.csv.gz", "green_tripdata_2020-11.csv.gz", "green_tripdata_2020-12.csv.gz"]
+    dfs = []
+    # Load data for the final quarter of 2020
+    for file_name in file_names:
+        full_url = base_url + file_name
+        df = pd.read_csv(full_url, parse_dates=['lpep_pickup_datetime'])
+        dfs.append(df)
+    return pd.concat(dfs)
+
+    # Load data for the final quarter of 2020
+    dfs = []
+    for month in range(10, 13):
+        full_url = url + f"0{month}.csv"
+        df = pd.read_csv(file_path, parse_dates=['lpep_pickup_datetime'])
+        dfs.append(df)
+    return pd.concat(dfs)
+
+    
+    # extract the columns/data types after looking at the data
+    taxi_datatypes = {
+        'VendorID': pd.Int64Dtype(),
+        'passenger_count': pd.Int64Dtype(),
+        'trip_distance': float,
+        'RatecodeID': pd.Int64Dtype(),
+        'store_and_fwd_flag': str,
+        'PULocationID': pd.Int64Dtype(),
+        'DOLocationID': pd.Int64Dtype(),
+        'payment_type': pd.Int64Dtype(),
+        'fare_amount': float,
+        'extra': float,
+        'mta_tax': float,
+        'tip_amount': float,
+        'tolls_amount': float,
+        'improvement_surcharge': float,
+        'total_amount': float,
+        'congestion_surcharge': float
+    }
+
+    parse_dates = ['tpep_pickup_datetime', 'tpep_dropoff_datetime']
+
+    return pd.read_csv(url, sep=",", compression="gzip", dtype=taxi_datatypes, parse_dates=parse_dates)
+
+
+@test
+def test_output(output, *args) -> None:
+    """
+    Template code for testing the output of the block.
+    """
+    # assert output is not None, 'The output is undefined'
+    assert output["vendor_id"] is not None, 'The output is undefined'
+    assert output['passenger_count'] > 0, 'Passenger count is not greater than 0'
+    assert output["trip_distance"] > 0, 'Trip distance is not greater than 0'

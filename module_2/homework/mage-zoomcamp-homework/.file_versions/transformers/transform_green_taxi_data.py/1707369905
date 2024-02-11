@@ -1,0 +1,46 @@
+if 'transformer' not in globals():
+    from mage_ai.data_preparation.decorators import transformer
+if 'test' not in globals():
+    from mage_ai.data_preparation.decorators import test
+
+
+@transformer
+def transform(data, *args, **kwargs):
+    """
+    Template code for a transformer block.
+
+    Add more parameters to this function if this block has multiple parent blocks.
+    There should be one parameter for each output variable from each parent block.
+
+    Args:
+        data: The output from the upstream parent block
+        args: The output from any additional upstream blocks (if applicable)
+
+    Returns:
+        Anything (e.g. data frame, dictionary, array, int, str, etc.)
+    """
+    # Specify your transformation logic here
+
+    # Remove rows where passenger count or trip distance is zero
+    data = data[(data['passenger_count'] > 0) & (data['trip_distance'] > 0)]
+    
+    # Create new column lpep_pickup_date
+    data['lpep_pickup_date'] = data['lpep_pickup_datetime'].dt.date
+    
+    # Rename columns to snake case
+    data = data.rename(columns=lambda x: x.lower())
+    data = data.rename(columns={'vendorid': 'vendor_id'})  # Example of renaming specific columns
+    
+    return data
+
+
+@test
+def test_output(output, *args) -> None:
+    print(output)
+    """
+    Assertion
+    """
+    assert output[data['vendor_id'].isin([1, 2]).all()], "Vendor ID should be 1 or 2"
+    assert output[(df['passenger_count'] > 0).all()], "Passenger count should be greater than 0"
+    assert output[(df['trip_distance'] > 0).all()], "Trip distance should be greater than 0"
+
